@@ -1,0 +1,34 @@
+# apphosting.yaml - Firebase App Hosting Configuration
+# Reference: https://firebase.google.com/docs/app-hosting/configure
+
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  minInstances: 0
+  maxInstances: 10
+  concurrency: 80
+
+# Environment variables & secrets configuration for Next.js App Router
+env:
+  - variable: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+    value: "pk_test_dm9jYWwtdGFycG9uLTEwNzMuY2xlcmsuYWNjb3VudHMuZGV2JA"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_URL
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_URL
+    value: "/"
+    availability:
+      - BUILD
+      - RUNTIME
+  # Secrets managed via Cloud Secret Manager / Firebase App Hosting Secrets:
+  - variable: DATABASE_URL
+    secret: DATABASE_URL
+  - variable: OPENAI_API_KEY
+    secret: OPENAI_API_KEY
+  - variable: CLERK_SECRET_KEY
+    secret: CLERK_SECRET_KEY
